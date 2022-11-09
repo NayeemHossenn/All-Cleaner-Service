@@ -13,7 +13,7 @@ const ServiceCard = ({ service }) => {
         <p className="text-xl">Price :${price}</p>
         <p>{description.slice(0, 100) + "....."} </p>
         <div className="card-actions justify-end">
-          <Link>
+          <Link to={`/allservices/${service._id}`}>
             {" "}
             <button className="btn btn-primary">See Details </button>
           </Link>

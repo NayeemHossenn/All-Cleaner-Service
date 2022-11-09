@@ -1,5 +1,6 @@
 import Main from "../../Layout/Main";
 import AllServices from "../../Pages/AllService/AllServices";
+import ServiceDetails from "../../Pages/AllService/ServiceDetails";
 import Home from "../../Pages/Home/Home/Home";
 
 import Login from "../../Pages/Login/Login";
@@ -27,6 +28,12 @@ const router = createBrowserRouter([
       {
         path: "/allservices",
         element: <AllServices></AllServices>,
+      },
+      {
+        path: "/allservices/:id",
+        element: <ServiceDetails></ServiceDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/allservices/${params.id}`),
       },
     ],
   },
