@@ -1,13 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import img from "../../assets/others/loginfinal.png";
 import { FaGoogle } from "react-icons/fa";
+import { GoogleAuthProvider } from "firebase/auth";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Login = () => {
-  const handleGoogleSignIn = () => {};
+  const { providerLogin, SignIn } = useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider();
+  const handleGoogleSignIn = () => {
+    providerLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.error(error));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    SignIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        form.reset();
+      })
+      .catch((error) => console.error(error.message));
   };
   return (
     <div className="hero  w-full">
@@ -24,8 +46,10 @@ const Login = () => {
               </label>
               <input
                 type="text"
+                name="email"
                 placeholder="email"
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control">
@@ -33,9 +57,11 @@ const Login = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="text"
+                type="password"
+                name="password"
                 placeholder="password"
                 className="input input-bordered"
+                required
               />
               <label className="label">
                 <a href="#" className="label-text-alt link link-hover">
@@ -48,7 +74,7 @@ const Login = () => {
             </div>
           </form>
           <p className="text-center">
-            Have an Account?
+            Haven't an Account?
             <Link className="text-orange-600 text-bold" to="/signup">
               SignUp
             </Link>
