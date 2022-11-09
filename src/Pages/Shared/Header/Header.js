@@ -4,7 +4,7 @@ import logo from "../../../assets/cleaner.svg";
 
 const Header = () => {
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 h-15 mb-10">
       <div className="flex-1">
         <Link
           to="/"

@@ -4,7 +4,7 @@ import logo from "../../../assets/icon/cleaner.ico";
 
 const Footer = () => {
   return (
-    <footer className="footer p-10 bg-neutral text-neutral-content">
+    <footer className="footer p-20 bg-neutral text-white">
       <div>
         <img src={logo} alt="" />
         <p>
