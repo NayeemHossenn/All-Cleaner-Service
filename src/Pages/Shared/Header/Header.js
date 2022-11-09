@@ -18,6 +18,9 @@ const Header = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
           <li tabIndex={0}>
             <Link to="/">Parent</Link>
             <ul className="p-2 bg-base-100"></ul>
