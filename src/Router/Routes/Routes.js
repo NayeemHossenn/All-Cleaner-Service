@@ -35,7 +35,9 @@ const router = createBrowserRouter([
         path: "/allservices/:id",
         element: <ServiceDetails></ServiceDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/allservices/${params.id}`),
+          fetch(
+            `https://all-cleaner-service-server.vercel.app/allservices/${params.id}`
+          ),
       },
       {
         path: "/reviews",

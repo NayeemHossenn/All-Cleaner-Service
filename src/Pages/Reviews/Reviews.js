@@ -10,7 +10,9 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`)
+    fetch(
+      `https://all-cleaner-service-server.vercel.app/reviews?email=${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, [user?.email]);
@@ -18,7 +20,7 @@ const Reviews = () => {
   const handleDelete = (_id) => {
     const confirm = window.confirm("Are You want to delete");
     if (confirm) {
-      fetch(`http://localhost:5000/reviews/${_id}`, {
+      fetch(`https://all-cleaner-service-server.vercel.app/reviews/${_id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -33,6 +35,20 @@ const Reviews = () => {
     }
   };
 
+  const handleEdit = (_id) => {
+    fetch(`https://all-cleaner-service-server.vercel.app/reviews/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(reviews),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
   return (
     <div>
       <h2 className="text-5xl text-center mb-8 text-blue-400"> Your Review </h2>
@@ -43,6 +59,7 @@ const Reviews = () => {
             key={rvw._id}
             rvw={rvw}
             handleDelete={handleDelete}
+            handleEdit={handleEdit}
           ></ReviewsCard>
         ))}
         <ToastContainer />

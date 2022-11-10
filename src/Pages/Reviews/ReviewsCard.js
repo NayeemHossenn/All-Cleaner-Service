@@ -4,7 +4,9 @@ const ReviewsCard = ({ rvw, handleDelete, handleEdit }) => {
   const { name, review, service, _id } = rvw;
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/allservices/${service}`)
+    fetch(
+      `https://all-cleaner-service-server.vercel.app/allservices/${service}`
+    )
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, [service]);
