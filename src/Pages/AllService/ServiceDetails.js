@@ -58,12 +58,8 @@ const ServiceDetails = () => {
           <div className="card-actions justify-end">
             <Link to={`/allservices/${services._id}`}>
               {" "}
-              <button className="btn btn-primary">See Details </button>
+              <button className="btn btn-primary">Rate Us! </button>
             </Link>
-            <button className="btn btn-primary">
-              {" "}
-              <Link to="/allservices">See All Service</Link>
-            </button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const ReviewsCard = ({ rvw, handleDelete }) => {
+const ReviewsCard = ({ rvw, handleDelete, handleEdit }) => {
   const { name, review, service, _id } = rvw;
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
@@ -15,7 +15,9 @@ const ReviewsCard = ({ rvw, handleDelete }) => {
         <h2 className="card-title">{name}</h2>
         <p>{review}</p>
         <div className="card-actions justify-end">
-          <button className="btn">Edit Review</button>
+          <button onClick={() => handleEdit(_id)} className="btn">
+            Edit Review
+          </button>
           <button onClick={() => handleDelete(_id)} className="btn">
             Delete Review
           </button>
