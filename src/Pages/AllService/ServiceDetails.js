@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
@@ -7,6 +7,8 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 const ServiceDetails = () => {
   const services = useLoaderData();
   const { user } = useContext(AuthContext);
+  const [allReviews, setAllReviews] = useState([]);
+
   const { _id, title, img, price, description } = services;
 
   const handleSubmit = (event) => {
@@ -42,9 +44,16 @@ const ServiceDetails = () => {
       .catch((error) => console.log(error));
   };
 
+  useEffect(() => {
+    fetch("http://localhost:5000/reviews")
+      .then((res) => res.json())
+      .then((data) => setAllReviews(data));
+    console.log(allReviews);
+  }, []);
+
   return (
-    <div className="grid lg:grid-cols-2 p-10">
-      <div className="card card-compact w-96 bg-base-100 shadow-xl">
+    <div className="grid lg:grid-cols-3 p-10">
+      <div className="card card-compact w-96 h-[70%] bg-base-100 shadow-xl">
         <PhotoProvider>
           <PhotoView src={img}>
             <img src={img} alt="" />
@@ -104,8 +113,22 @@ const ServiceDetails = () => {
           </>
         )}
       </div>
+
+      <div className="ml-5 ">
+        <h2 className="text-2xl mb-3">Our Reviews</h2>{" "}
+        {allReviews.map((allreview) => (
+          <div className=" bg-blue-400 p-5 ">
+            {" "}
+            <h2 className="text-xl">{allreview.name}</h2>
+            <h2 className="">{allreview.review}</h2>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 export default ServiceDetails;
+// {allReviews.map((allreview) => (
+//   <p>{allreview.name}</p>
+// ))}

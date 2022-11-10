@@ -36,7 +36,7 @@ const Header = () => {
                 <Link to="/reviews">My Reviews</Link>
               </li>
               <li>
-                <Link to="/reviews">Add Service</Link>
+                <Link to="/">Add Service</Link>
               </li>
             </>
           ) : (
