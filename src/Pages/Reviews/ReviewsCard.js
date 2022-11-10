@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const ReviewsCard = ({ rvw }) => {
+const ReviewsCard = ({ rvw, handleDelete }) => {
   const { name, review, service, _id } = rvw;
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
@@ -8,19 +8,6 @@ const ReviewsCard = ({ rvw }) => {
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, [service]);
-
-  const handleDelete = (_id) => {
-    const confirm = window.confirm("Are You want to delete");
-    if (confirm) {
-      fetch(`http://localhost:5000/reviews/${_id}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        });
-    }
-  };
 
   return (
     <div className="card w-96 bg-primary text-primary-content">

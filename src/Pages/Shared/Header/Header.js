@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const Header = () => {
-  const { logOut } = useContext(AuthContext);
+  const { logOut, user } = useContext(AuthContext);
   const handlelogOut = () => {
     logOut().then().catch();
   };
@@ -24,16 +24,29 @@ const Header = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li tabIndex={0}>
-            <Link onClick={handlelogOut}>SignOut</Link>
-            <ul className="p-2 bg-base-100"></ul>
-          </li>
-          <li>
-            <Link to="/">Add Service</Link>
-          </li>
+
+          {user?.email ? (
+            <>
+              {" "}
+              <li tabIndex={0}>
+                <Link onClick={handlelogOut}>LogOut</Link>
+                <ul className="p-2 bg-base-100"></ul>
+              </li>
+              <li>
+                <Link to="/reviews">My Reviews</Link>
+              </li>
+              <li>
+                <Link to="/reviews">Add Service</Link>
+              </li>
+            </>
+          ) : (
+            <>
+              {" "}
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>
