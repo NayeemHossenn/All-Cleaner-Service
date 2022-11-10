@@ -32,7 +32,7 @@ const Header = () => {
             <ul className="p-2 bg-base-100"></ul>
           </li>
           <li>
-            <Link to="/">Add service</Link>
+            <Link to="/">Add Service</Link>
           </li>
         </ul>
       </div>
